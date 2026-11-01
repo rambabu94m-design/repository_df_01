@@ -27,10 +27,17 @@
 					"dataset": {
 						"referenceName": "DS_sqldb_11",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
+		"parameters": {
+			"source_system": {
+				"type": "string",
+				"defaultValue": "neon_postgres"
+			}
+		},
 		"annotations": []
 	}
 }
