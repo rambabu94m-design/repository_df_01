@@ -1,0 +1,23 @@
+{
+	"name": "LS_postgres_11",
+	"properties": {
+		"annotations": [],
+		"type": "PostgreSqlV2",
+		"typeProperties": {
+			"server": "ep-royal-scene-b47pbypg-pooler.c-6.us-east-2.aws.neon.tech",
+			"port": 5432,
+			"database": "neondb",
+			"username": "neondb_owner",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_keyvault_11",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "postgressourcesecret"
+			},
+			"sslMode": 2,
+			"authenticationType": "Basic"
+		}
+	}
+}
