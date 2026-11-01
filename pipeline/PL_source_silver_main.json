@@ -61,7 +61,7 @@
 							"typeProperties": {
 								"variableName": "setvariable",
 								"value": {
-									"value": "@item()",
+									"value": "@string(item())",
 									"type": "Expression"
 								}
 							}
