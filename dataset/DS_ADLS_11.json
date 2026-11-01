@@ -7,10 +7,12 @@
 		},
 		"parameters": {
 			"container": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "landing-11"
 			},
 			"folder": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "folder"
 			}
 		},
 		"annotations": [],
