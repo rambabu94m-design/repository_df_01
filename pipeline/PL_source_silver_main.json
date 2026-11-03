@@ -51,7 +51,7 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "Execute Pipeline",
+							"name": "inject from source_silver",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
