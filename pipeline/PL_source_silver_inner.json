@@ -53,13 +53,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "table data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "current_timestamp",
+						"activity": "Load check",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -234,6 +228,82 @@
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
 				}
+			},
+			{
+				"name": "Load check",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "current_timestamp",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "table data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@not(equals(activity('table data').output.firstRow.load_type,'FULL'))",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "watermarkvalue activity",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 2,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select watermark_value from ctrl.watermark where table_id=@{pipeline().parameters.table_id};",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "DS_sqldb_11",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "Set variable",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "watermarkvalue activity",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "watermark_variable",
+								"value": ""
+							}
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
@@ -247,6 +317,9 @@
 		},
 		"variables": {
 			"current_timestamp_11": {
+				"type": "String"
+			},
+			"watermark_variable": {
 				"type": "String"
 			}
 		},
