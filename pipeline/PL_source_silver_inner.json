@@ -112,7 +112,7 @@
 						"referenceName": "DS_ADLS_11",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "landing-11",
+							"container": "landing",
 							"folder": {
 								"value": "@concat(\n    activity('table data').output.firstRow.source_system,\n    '/',\n    activity('table data').output.firstRow.source_table_name,\n    '/',\n    variables('current_timestamp_11')\n)",
 								"type": "Expression"
