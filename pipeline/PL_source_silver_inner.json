@@ -120,6 +120,84 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Landing_bronze",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "inject data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/repository/repository_df_01/landing_bronze",
+					"baseParameters": {
+						"source_system": {
+							"value": "@activity('table data').output.firstRow.source_system",
+							"type": "Expression"
+						},
+						"source_table_name": {
+							"value": "@activity('table data').output.firstRow.bronze_table_name",
+							"type": "Expression"
+						},
+						"timestamp": {
+							"value": "@variables('current_timestamp_11')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_azuredatabrick11",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Bronze_siver",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Landing_bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/repository/repository_df_01/bronze_silver",
+					"baseParameters": {
+						"source_table_name": {
+							"value": "@activity('table data').output.firstRow.silver_table_name",
+							"type": "Expression"
+						},
+						"timestamp": {
+							"value": "@variables('current_timestamp_11')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_azuredatabrick11",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
