@@ -437,7 +437,14 @@
 									"outputs": [
 										{
 											"referenceName": "DS_CSV_source",
-											"type": "DatasetReference"
+											"type": "DatasetReference",
+											"parameters": {
+												"folder": {
+													"value": "@concat(\n    activity('table data').output.firstRow.source_system,\n    '/',\n    activity('table data').output.firstRow.source_table_name,\n    '/',\n    variables('current_timestamp_11')\n)",
+													"type": "Expression"
+												},
+												"container": "landing"
+											}
 										}
 									]
 								}
