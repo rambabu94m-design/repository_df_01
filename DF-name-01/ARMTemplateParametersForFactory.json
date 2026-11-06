@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DF-name-01"
+		},
+		"LS_ADLS_11_accountKey": {
+			"value": ""
+		},
+		"LS_ADLS_11_properties_typeProperties_url": {
+			"value": "https://adlsname11.dfs.core.windows.net/"
+		},
+		"LS_azuredatabrick11_properties_typeProperties_existingClusterId": {
+			"value": "1103-050539-a2tqux0i"
+		},
+		"LS_keyvault_11_properties_typeProperties_baseUrl": {
+			"value": "https://keyvault-name-11.vault.azure.net/"
+		},
+		"LS_postgres_11_properties_typeProperties_server": {
+			"value": "ep-royal-scene-b47pbypg-pooler.c-6.us-east-2.aws.neon.tech"
+		},
+		"LS_postgres_11_properties_typeProperties_database": {
+			"value": "neondb"
+		},
+		"LS_postgres_11_properties_typeProperties_username": {
+			"value": "neondb_owner"
+		},
+		"LS_sqldb_properties_typeProperties_server": {
+			"value": "server-name-11.database.windows.net"
+		},
+		"LS_sqldb_properties_typeProperties_database": {
+			"value": "DB-name-11"
+		},
+		"LS_sqldb_properties_typeProperties_userName": {
+			"value": "test11"
+		},
+		"LS_tokenaccess_properties_typeProperties_baseUrl": {
+			"value": "https://keyvault-name-11.vault.azure.net/"
+		}
+	}
+}
