@@ -71,7 +71,7 @@
 					"source": {
 						"type": "PostgreSqlV2Source",
 						"query": {
-							"value": "select * from PUBLIC.@{activity('table data').output.firstRow.source_table_name}",
+							"value": "select * from PUBLIC.@{activity('table data').output.firstRow.source_table_name}\n@{\n    if(equals(activity('table data').output.firstRow.load_type,'FULL')\n    ,''\n    ,concat(\n        'where',activity('table data').output.firstRow.watermark_value,'>','''',variables('watermark_variable'),''''\n    ))\n\n}\nwhere patient_id=3",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00"
@@ -299,7 +299,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "watermark_variable",
-								"value": ""
+								"value": {
+									"value": "@activity('watermarkvalue activity').output.watermark_value",
+									"type": "Expression"
+								}
 							}
 						}
 					]
