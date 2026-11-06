@@ -185,6 +185,14 @@
 						"timestamp": {
 							"value": "@variables('current_timestamp_11')",
 							"type": "Expression"
+						},
+						"load_type": {
+							"value": "@activity('table data').output.firstRow.load_type",
+							"type": "Expression"
+						},
+						"merge_keys": {
+							"value": "@coalesce(activity('table data').output.firstRow.load_type,'')",
+							"type": "Expression"
 						}
 					}
 				},
@@ -303,6 +311,56 @@
 									"value": "@activity('watermarkvalue activity').output.watermark_value",
 									"type": "Expression"
 								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "check load_type and update the watermark value",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Landing_bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@not(equals(activity('table data').output.firstRow.load_type,'FULL'))",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "update watermark value",
+							"type": "Script",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"linkedServiceName": {
+								"referenceName": "LS_sqldb",
+								"type": "LinkedServiceReference"
+							},
+							"typeProperties": {
+								"scripts": [
+									{
+										"type": "Query",
+										"text": {
+											"value": "update ctrl.watermark \nset watermark_value=SYSUTCDATETIME\nwhere table_id=@{pipeline().parameters.table_id}",
+											"type": "Expression"
+										}
+									}
+								],
+								"scriptBlockExecutionTimeout": "02:00:00"
 							}
 						}
 					]
