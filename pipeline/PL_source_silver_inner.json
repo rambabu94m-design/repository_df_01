@@ -81,6 +81,10 @@
 						"timestamp": {
 							"value": "@variables('current_timestamp_11')",
 							"type": "Expression"
+						},
+						"source_file_format": {
+							"value": "@coalesce(activity('table data').output.firstRow.source_file_format,'')",
+							"type": "Expression"
 						}
 					}
 				},
