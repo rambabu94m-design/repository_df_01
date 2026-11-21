@@ -1,0 +1,44 @@
+{
+	"name": "send mail pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": {
+							"value": "application/json",
+							"type": "Expression"
+						}
+					},
+					"url": {
+						"value": "https://prod-00.northcentralus.logic.azure.com:443/workflows/925a38374c564b8581181ddd29a093a5/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=maJ4rAsp2Qy8x8H-jMqEYq28_d0Kaiiy90Jpf2uNLio",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "{\"table_name\":\"@{pipeline().parameters.table_name}\"}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"table_name": {
+				"type": "string",
+				"defaultValue": "test"
+			}
+		},
+		"annotations": []
+	}
+}
