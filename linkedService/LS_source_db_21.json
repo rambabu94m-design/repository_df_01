@@ -1,0 +1,23 @@
+{
+	"name": "LS_source_db_21",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sourceservernew21.database.windows.net",
+			"database": "sourcedatabase21",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "Anusha",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_keyvault_11",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "testsecret"
+			}
+		}
+	}
+}
