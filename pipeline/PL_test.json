@@ -5,14 +5,9 @@
 			{
 				"name": "inject data",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "get meta data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 2,
@@ -199,6 +194,41 @@
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "check count",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "get meta data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select count(*)  from @{pipeline().parameters.table_name} where datemodified>'@{activity('get meta data').output.firstRow.watermark_datetime}'",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_source_21",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
