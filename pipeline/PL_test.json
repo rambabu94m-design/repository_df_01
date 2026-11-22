@@ -148,7 +148,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('check count').output.firstRow.count,0)",
+						"value": "@greater(activity('check count').output.firstRow,0)",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [
