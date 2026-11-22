@@ -42,7 +42,14 @@
 			{
 				"name": "prepare email body",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "prepare email subject1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
@@ -52,6 +59,23 @@
 					"variableName": "logic_app_body1",
 					"value": {
 						"value": "{\"email_recipient\":\"rambabu94m@gmail.com\",\n\"subject\":\"ingest success\",\n\"body\":\"the table test has been ingested successfully\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "prepare email subject1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_subject1",
+					"value": {
+						"value": "ingest success",
 						"type": "Expression"
 					}
 				}
@@ -80,6 +104,9 @@
 				"type": "String"
 			},
 			"logic_app_body1": {
+				"type": "String"
+			},
+			"email_subject1": {
 				"type": "String"
 			}
 		},
