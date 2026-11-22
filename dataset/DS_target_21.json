@@ -19,7 +19,10 @@
 					"value": "@concat(dataset().table_name,'_',utcNow())",
 					"type": "Expression"
 				},
-				"folderPath": "folder",
+				"folderPath": {
+					"value": "@dataset().table_name",
+					"type": "Expression"
+				},
 				"fileSystem": "container"
 			},
 			"columnDelimiter": ",",
