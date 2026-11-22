@@ -5,8 +5,6 @@
 			{
 				"name": "inject data",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "get meta data",
@@ -71,8 +69,6 @@
 			{
 				"name": "Execute Pipeline success",
 				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "inject data",
@@ -107,8 +103,6 @@
 			{
 				"name": "Execute Pipeline_failure",
 				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "inject data",
