@@ -27,7 +27,7 @@
 					"source": {
 						"type": "PostgreSqlV2Source",
 						"query": {
-							"value": "select * from customer where datemodified>'2026-11-21T09:15:00.0000000'",
+							"value": "select * from customer where datemodified>'@{activity('get meta data').output.firstRow.watermark_datetime}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00"
