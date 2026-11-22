@@ -23,20 +23,23 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "PostgreSqlV2Source",
-						"query": {
-							"value": "select * from customer where datemodified>'@{activity('get meta data').output.firstRow.watermark_datetime}'",
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from dbo.customer where datemodified>'@{activity('get meta data').output.firstRow.watermark_datetime}'",
 							"type": "Expression"
 						},
-						"queryTimeout": "02:00:00"
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "ParquetSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "ParquetWriteSettings"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false,
@@ -51,19 +54,14 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_postgres_11",
+						"referenceName": "DS_source_21",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ADLS_11",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "landing-11",
-							"folder": "folder",
-							"table_name": "customer"
-						}
+						"referenceName": "DS_target_21",
+						"type": "DatasetReference"
 					}
 				]
 			},
