@@ -5,7 +5,14 @@
 			{
 				"name": "Web",
 				"type": "WebActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "prepare email body",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -27,7 +34,71 @@
 						"type": "Expression"
 					},
 					"body": {
-						"value": "{\"table_name\":\"@{pipeline().parameters.table_name}\"}",
+						"value": "@variables('logic_app_body')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "prepare email body",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "email subject",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "prepare body",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "logic_app_body",
+					"value": {
+						"value": "{\"email_recipient\":\"@{pipeline().parameters.email_recipient}\",\n\"subject\":\"@{variables('email_subject')}\",\n\"body\":\"@{variables('email_body')}\",\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "email subject",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_subject",
+					"value": {
+						"value": "\"ingest success\"",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "prepare body",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_body",
+					"value": {
+						"value": "\"the table @{pipeline().parameters.table_name}has been ingested successfully\"",
 						"type": "Expression"
 					}
 				}
@@ -37,6 +108,23 @@
 			"table_name": {
 				"type": "string",
 				"defaultValue": "test"
+			},
+			"email_recipient": {
+				"type": "string"
+			},
+			"status": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"logic_app_body": {
+				"type": "String"
+			},
+			"email_subject": {
+				"type": "String"
+			},
+			"email_body": {
+				"type": "String"
 			}
 		},
 		"annotations": []
