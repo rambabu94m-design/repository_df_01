@@ -61,7 +61,10 @@
 				"outputs": [
 					{
 						"referenceName": "DS_target_21",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "customer"
+						}
 					}
 				]
 			},
@@ -190,7 +193,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "update WatermarkTable \nset watermark_datetime =current_timestamp;",
+								"value": "update WatermarkTable \nset watermark_datetime =current_timestamp where table_name='@{pipeline().parameters.table_name}'",
 								"type": "Expression"
 							}
 						}
