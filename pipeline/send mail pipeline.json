@@ -48,6 +48,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "prepare email body1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"policy": {
@@ -79,6 +85,23 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "prepare email body1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_body1",
+					"value": {
+						"value": "the table @{pipeline().parameters.table_name} has been ingested successfully",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -107,6 +130,9 @@
 				"type": "String"
 			},
 			"email_subject1": {
+				"type": "String"
+			},
+			"email_body1": {
 				"type": "String"
 			}
 		},
