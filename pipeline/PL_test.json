@@ -3,77 +3,9 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "inject data",
-				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 2,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": {
-							"value": "select * from dbo.customer where datemodified>'@{activity('get meta data').output.firstRow.watermark_datetime}'",
-							"type": "Expression"
-						},
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "DS_source_21",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DS_target_21",
-						"type": "DatasetReference",
-						"parameters": {
-							"table_name": "customer"
-						}
-					}
-				]
-			},
-			{
 				"name": "Execute Pipeline success",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "inject data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"secureInput": false
 				},
@@ -100,14 +32,7 @@
 			{
 				"name": "Execute Pipeline_failure",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "inject data",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"secureInput": false
 				},
@@ -163,14 +88,7 @@
 			{
 				"name": "update metadata",
 				"type": "Script",
-				"dependsOn": [
-					{
-						"activity": "inject data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -229,6 +147,86 @@
 						"referenceName": "DS_source_21",
 						"type": "DatasetReference"
 					}
+				}
+			},
+			{
+				"name": "check for latest records",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "check count",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(activity('check count').output.firstRow,'0')",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "inject data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 2,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select * from dbo.customer where datemodified>'@{activity('get meta data').output.firstRow.watermark_datetime}'",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_source_21",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_target_21",
+									"type": "DatasetReference",
+									"parameters": {
+										"table_name": "customer"
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
