@@ -31,6 +31,16 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "prepare email body",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"parameters": {
