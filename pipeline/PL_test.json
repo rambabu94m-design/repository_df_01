@@ -27,7 +27,7 @@
 					"source": {
 						"type": "PostgreSqlV2Source",
 						"query": {
-							"value": "select * from PUBLIC.hospitals ",
+							"value": "select * from customer where datemodified>'2026-11-21T09:15:00.0000000'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00"
@@ -156,7 +156,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from customer where datemodified>'2026-11-21T09:15:00.0000000'",
+							"value": "select watermark_datetime from WatermarkTable where table_name='@{pipeline().parameters.table_name}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -165,7 +165,8 @@
 					"dataset": {
 						"referenceName": "DS_source_21",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
