@@ -64,7 +64,7 @@
 				"typeProperties": {
 					"variableName": "logic_app_body1",
 					"value": {
-						"value": "{\"email_recipient\":\"rambabu94m@gmail.com\",\n\"subject\":\"@{variables('email_subject1')}\",\n\"body\":\"the table test has been ingested successfully\"\n}",
+						"value": "{\"email_recipient\":\"@{pipeline().parameters.email_recipient}\",\n\"subject\":\"@{variables('email_subject1')}\",\n\"body\":\"@{variables('email_body1')}\"\n}",
 						"type": "Expression"
 					}
 				}
