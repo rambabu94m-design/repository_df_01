@@ -5,11 +5,20 @@
 			"referenceName": "LS_target_21",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"table_name": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().table_name,'_',utcNow())",
+					"type": "Expression"
+				},
 				"folderPath": "folder",
 				"fileSystem": "container"
 			},
