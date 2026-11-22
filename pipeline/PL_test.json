@@ -166,7 +166,7 @@
 						"referenceName": "DS_source_21",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
 				}
 			}
 		],
