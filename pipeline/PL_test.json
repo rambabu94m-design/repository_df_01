@@ -61,7 +61,8 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "landing-11",
-							"folder": "folder"
+							"folder": "folder",
+							"table_name": "customer"
 						}
 					}
 				]
