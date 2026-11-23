@@ -17,6 +17,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute Pipeline",
@@ -62,7 +63,8 @@
 					"dataset": {
 						"referenceName": "DS_source_21",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
