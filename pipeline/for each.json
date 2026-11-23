@@ -5,8 +5,6 @@
 			{
 				"name": "ingest all tables",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "get list of tables",
@@ -17,6 +15,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('get list of tables').output.value",
+						"type": "Expression"
+					},
 					"isSequential": false,
 					"activities": [
 						{
@@ -32,7 +34,13 @@
 									"referenceName": "PL_test",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"table_name": {
+										"value": "@item().table_name",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
