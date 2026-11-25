@@ -42,6 +42,46 @@
 									}
 								}
 							}
+						},
+						{
+							"name": "store tables success",
+							"type": "AppendVariable",
+							"dependsOn": [
+								{
+									"activity": "Execute Pipeline",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "variable of all the tables",
+								"value": {
+									"value": "@{item().table_name}-success",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "store tables failure",
+							"type": "AppendVariable",
+							"dependsOn": [
+								{
+									"activity": "Execute Pipeline",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "variables of all the tables failure",
+								"value": {
+									"value": "@{item().table_name}-failure",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
@@ -76,6 +116,14 @@
 				}
 			}
 		],
+		"variables": {
+			"variable of all the tables": {
+				"type": "Array"
+			},
+			"variables of all the tables failure": {
+				"type": "Array"
+			}
+		},
 		"annotations": []
 	}
 }

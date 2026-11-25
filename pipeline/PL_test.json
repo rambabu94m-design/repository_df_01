@@ -5,6 +5,8 @@
 			{
 				"name": "Execute Pipeline success",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "check for latest records",
@@ -39,6 +41,8 @@
 			{
 				"name": "Execute Pipeline_failure",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "check for latest records",
