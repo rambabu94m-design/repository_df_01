@@ -132,7 +132,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "send mail pipeline",
+						"referenceName": "send mail pipeline_multiple",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true,
