@@ -137,9 +137,12 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"email_recipient": "rambabu94m@gmail.com",
+						"email_recipient": {
+							"value": "@pipeline().globalParameters.email_recepient",
+							"type": "Expression"
+						},
 						"table_status": {
-							"value": "@variables('variable of all the tables')",
+							"value": "@variables('table_variable')",
 							"type": "Expression"
 						}
 					}
