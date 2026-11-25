@@ -1,0 +1,12 @@
+{
+	"name": "DF-name-01",
+	"properties": {
+		"globalParameters": {
+			"email_recepient": {
+				"type": "string",
+				"value": "rambabu94m@gmail.com"
+			}
+		}
+	},
+	"location": "eastus"
+}
