@@ -81,7 +81,7 @@
 				"typeProperties": {
 					"variableName": "email_subject1",
 					"value": {
-						"value": "ingest success",
+						"value": "ingestion completed",
 						"type": "Expression"
 					}
 				}
@@ -98,7 +98,7 @@
 				"typeProperties": {
 					"variableName": "email_body1",
 					"value": {
-						"value": "the table @{pipeline().parameters.table_name} has been ingested successfully",
+						"value": "The ingeston process has been completed for all the tables and below is the status:\n@{pipeline().parameters.table_status}\n\npipeline run id=@{pipeline().RunId}",
 						"type": "Expression"
 					}
 				}
