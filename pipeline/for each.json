@@ -114,6 +114,29 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "consolidated email",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ingest all tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "send mail pipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"variables": {

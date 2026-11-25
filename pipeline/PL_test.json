@@ -26,15 +26,10 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"table_name": {
-							"value": "@pipeline().parameters.table_name",
-							"type": "Expression"
-						},
 						"email_recipient": {
 							"value": "rambabu94m@gmail.com",
 							"type": "Expression"
-						},
-						"status": "success"
+						}
 					}
 				}
 			},
@@ -62,15 +57,10 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"table_name": {
-							"value": "@pipeline().parameters.table_name",
-							"type": "Expression"
-						},
 						"email_recipient": {
 							"value": "rambabu94m@gmail.com",
 							"type": "Expression"
-						},
-						"status": "Failure"
+						}
 					}
 				}
 			},
