@@ -1,0 +1,137 @@
+{
+	"name": "send mail pipeline_multiple",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "prepare email body",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": {
+							"value": "application/json",
+							"type": "Expression"
+						}
+					},
+					"url": {
+						"value": "https://prod-00.northcentralus.logic.azure.com:443/workflows/925a38374c564b8581181ddd29a093a5/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=maJ4rAsp2Qy8x8H-jMqEYq28_d0Kaiiy90Jpf2uNLio",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "@variables('logic_app_body1')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "prepare email body",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "prepare email subject1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "prepare email body1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "logic_app_body1",
+					"value": {
+						"value": "{\"email_recipient\":\"@{pipeline().parameters.email_recipient}\",\n\"subject\":\"@{variables('email_subject1')}\",\n\"body\":\"@{variables('email_body1')}\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "prepare email subject1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_subject1",
+					"value": {
+						"value": "ingestion completed",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "prepare email body1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email_body1",
+					"value": {
+						"value": "The ingeston process has been completed for all the tables and below is the status:\n@{pipeline().parameters.table_status}\n\npipeline run id=@{pipeline().RunId}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"email_recipient": {
+				"type": "string"
+			},
+			"table_status": {
+				"type": "array"
+			}
+		},
+		"variables": {
+			"logic_app_body": {
+				"type": "String"
+			},
+			"email_subject": {
+				"type": "String"
+			},
+			"email_body": {
+				"type": "String"
+			},
+			"logic_app_body1": {
+				"type": "String"
+			},
+			"email_subject1": {
+				"type": "String"
+			},
+			"email_body1": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
