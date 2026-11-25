@@ -105,15 +105,11 @@
 			}
 		],
 		"parameters": {
-			"table_name": {
-				"type": "string",
-				"defaultValue": "test"
-			},
 			"email_recipient": {
 				"type": "string"
 			},
-			"status": {
-				"type": "string"
+			"table_status": {
+				"type": "array"
 			}
 		},
 		"variables": {
