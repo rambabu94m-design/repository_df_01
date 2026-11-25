@@ -135,7 +135,14 @@
 						"referenceName": "send mail pipeline",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"email_recipient": "rambabu94m@gmail.com",
+						"table_status": {
+							"value": "@variables('variable of all the tables')",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
