@@ -74,15 +74,13 @@
 						"referenceName": "DS_binary_metadata",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "source_folder",
-							"file_name": "a2file.txt"
+							"folder": "source_folder"
 						}
 					},
 					"fieldList": [
 						"itemName",
 						"itemType",
-						"lastModified",
-						"size"
+						"lastModified"
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
