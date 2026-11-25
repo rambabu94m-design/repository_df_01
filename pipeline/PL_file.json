@@ -214,6 +214,13 @@
 										}
 									}
 								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LS_target_21",
+										"type": "LinkedServiceReference"
+									},
+									"path": "container"
+								},
 								"enableLogging": true,
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
