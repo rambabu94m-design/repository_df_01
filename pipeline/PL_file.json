@@ -74,7 +74,8 @@
 						"referenceName": "DS_binary_metadata",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "source_folder"
+							"folder": "source_folder",
+							"file_name": "*"
 						}
 					},
 					"fieldList": [
@@ -124,8 +125,7 @@
 									"referenceName": "DS_binary_metadata",
 									"type": "DatasetReference",
 									"parameters": {
-										"folder": "target_folder",
-										"file_name": "*"
+										"folder": "target_folder"
 									}
 								},
 								"fieldList": [
