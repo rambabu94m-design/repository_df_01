@@ -50,8 +50,8 @@
 						"referenceName": "DS_target_file",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "folder_name",
-							"file_name": "file_name"
+							"folder": "target_folder",
+							"file_name": "a1.txt"
 						}
 					}
 				]
