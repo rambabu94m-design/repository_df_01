@@ -57,33 +57,44 @@
 				"outputs": [
 					{
 						"referenceName": "DS_target_db_28",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "salary"
+						}
 					}
 				]
 			},
 			{
-				"name": "Lookup",
-				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"name": "Web",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
-					"retry": 2,
+					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
 					},
-					"dataset": {
-						"referenceName": "DS_source_db_28",
-						"type": "DatasetReference"
+					"url": {
+						"value": "https://prod-29.northcentralus.logic.azure.com:443/workflows/08e751328cb448f69ef4780d2aac6b75/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=THCA6Ip46cFp29tCC9y2akPQwoibiJRA_9nX-qMwaBU",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "{\"table_name\":@{pipeline().parameters.table_name}}",
+						"type": "Expression"
 					}
 				}
 			}
