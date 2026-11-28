@@ -1,0 +1,61 @@
+{
+	"name": "PL_trigger",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy file",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "source_folder",
+							"wildcardFileName": "a*.txt",
+							"deleteFilesAfterCompletion": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_file_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"container_name": "source"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_target_file",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": "target_folder_name"
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
