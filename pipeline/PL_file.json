@@ -76,7 +76,7 @@
 						"parameters": {
 							"container_name": "source",
 							"folder_name": "source_folder",
-							"file_name": "*a.txt"
+							"file_name": "a1.txt"
 						}
 					},
 					"fieldList": [
