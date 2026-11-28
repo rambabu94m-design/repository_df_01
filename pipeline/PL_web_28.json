@@ -95,7 +95,7 @@
 				"typeProperties": {
 					"variableName": "email body variable",
 					"value": {
-						"value": "\"The table test has been ingested successfully\"",
+						"value": "\"The table @{pipeline().parameters.table_name} has been ingested successfully\"",
 						"type": "Expression"
 					}
 				}
