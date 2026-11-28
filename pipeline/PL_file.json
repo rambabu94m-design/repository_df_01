@@ -80,6 +80,8 @@
 						}
 					},
 					"fieldList": [
+						"itemName",
+						"itemType",
 						"size"
 					],
 					"storeSettings": {
