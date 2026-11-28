@@ -104,6 +104,12 @@
 		"parameters": {
 			"table_name": {
 				"type": "string"
+			},
+			"status": {
+				"type": "string"
+			},
+			"email_recipient": {
+				"type": "string"
 			}
 		},
 		"variables": {
