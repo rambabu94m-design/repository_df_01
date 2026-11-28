@@ -41,7 +41,8 @@
 						"referenceName": "DS_file_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"container_name": "source"
+							"container_name": "source",
+							"folder_name": "source_folder"
 						}
 					}
 				],
