@@ -20,7 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFileName": "*",
+							"wildcardFolderPath": "source_folder",
+							"wildcardFileName": "*C",
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
@@ -40,8 +41,7 @@
 						"referenceName": "DS_file_source",
 						"type": "DatasetReference",
 						"parameters": {
-							"container_name": "source",
-							"folder_name": "source_folder"
+							"container_name": "source"
 						}
 					}
 				],
