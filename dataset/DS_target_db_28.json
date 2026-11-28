@@ -1,0 +1,23 @@
+{
+	"name": "DS_target_db_28",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_target_db_28",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "target_folder",
+				"fileSystem": "containers"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
