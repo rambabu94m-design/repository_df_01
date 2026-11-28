@@ -80,7 +80,6 @@
 						}
 					},
 					"fieldList": [
-						"childItems",
 						"size"
 					],
 					"storeSettings": {
