@@ -1,0 +1,16 @@
+{
+	"name": "DS_source_db_28",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_source_db_28",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Employee"
+		}
+	}
+}
