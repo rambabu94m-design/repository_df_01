@@ -65,7 +65,7 @@
 				]
 			},
 			{
-				"name": "Execute Pipeline",
+				"name": "Execute Pipeline success",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -84,7 +84,36 @@
 						"referenceName": "PL_web_28",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"status": "success"
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline failure",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Copy data",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_web_28",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"status": "failure"
+					}
 				}
 			}
 		],
