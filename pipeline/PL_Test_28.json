@@ -57,10 +57,7 @@
 				"outputs": [
 					{
 						"referenceName": "DS_target_db_28",
-						"type": "DatasetReference",
-						"parameters": {
-							"table_name": "employee"
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
