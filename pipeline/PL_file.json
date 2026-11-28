@@ -122,10 +122,9 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "DS_binary_metadata",
+									"referenceName": "DS_metadata_size",
 									"type": "DatasetReference",
 									"parameters": {
-										"folder": "source_folder",
 										"file_name": {
 											"value": "@item().name",
 											"type": "Expression"
