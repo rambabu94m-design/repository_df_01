@@ -1,5 +1,5 @@
 {
-	"name": "PL_Test_28",
+	"name": "PL_Test_ingetion_28",
 	"properties": {
 		"activities": [
 			{
@@ -63,6 +63,29 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Execute Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Copy data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_web_28",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"parameters": {
