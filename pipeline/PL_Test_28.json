@@ -17,6 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from dbo.@{pipeline().parameters.table_name}",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -44,17 +48,55 @@
 				"inputs": [
 					{
 						"referenceName": "DS_source_db_28",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "dbo"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "DS_target_db_28",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "employee"
+						}
 					}
 				]
+			},
+			{
+				"name": "Lookup",
+				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_source_db_28",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
+		"parameters": {
+			"table_name": {
+				"type": "string",
+				"defaultValue": "employee"
+			}
+		},
 		"annotations": []
 	}
 }

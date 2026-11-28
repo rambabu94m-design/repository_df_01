@@ -21,7 +21,10 @@
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
 							"wildcardFolderPath": "source_folder",
-							"wildcardFileName": "a*.txt",
+							"wildcardFileName": {
+								"value": "@pipeline().parameters.file_name",
+								"type": "Expression"
+							},
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
@@ -58,7 +61,7 @@
 			}
 		],
 		"parameters": {
-			"table_name": {
+			"file_name": {
 				"type": "string"
 			}
 		},
