@@ -5,7 +5,14 @@
 			{
 				"name": "Web",
 				"type": "WebActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable web logic body",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -24,7 +31,71 @@
 						"type": "Expression"
 					},
 					"body": {
-						"value": "{\"table_name\":\"@{pipeline().parameters.table_name}\"}",
+						"value": "@variables('body variable')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable web logic body",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable subject",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set variable body",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "logic body variable",
+					"value": {
+						"value": "{\"email_recepient\":\"rambabu94m@gmail.com\",\n\"subject\":\"status_success\",\n\"body\":\"the table test has been injected successfully\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable subject",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "subject variable",
+					"value": {
+						"value": "\"status_success\"",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable body",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "email body variable",
+					"value": {
+						"value": "\"the table test has been injected successfully\"",
 						"type": "Expression"
 					}
 				}
@@ -33,6 +104,20 @@
 		"parameters": {
 			"table_name": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"body variable": {
+				"type": "String"
+			},
+			"subject variable": {
+				"type": "String"
+			},
+			"logic body variable": {
+				"type": "String"
+			},
+			"email body variable": {
+				"type": "String"
 			}
 		},
 		"annotations": []
