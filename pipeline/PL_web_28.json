@@ -31,7 +31,7 @@
 						"type": "Expression"
 					},
 					"body": {
-						"value": "@variables('body variable')",
+						"value": "@variables('logic body variable')",
 						"type": "Expression"
 					}
 				}
@@ -61,7 +61,7 @@
 				"typeProperties": {
 					"variableName": "logic body variable",
 					"value": {
-						"value": "{\"email_recepient\":\"rambabu94m@gmail.com\",\n\"subject\":\"status_success\",\n\"body\":\"the table test has been injected successfully\"\n}",
+						"value": "{\"email_recepient\":\"rambabu94m@gmail.com\",\n\"subject\":\"@{variables('subject variable')}\",\n\"body\":\"@{variables('email body variable')}\"\n}",
 						"type": "Expression"
 					}
 				}
