@@ -61,7 +61,7 @@
 				"typeProperties": {
 					"variableName": "logic body variable",
 					"value": {
-						"value": "{\n  \"email_recipient\": \"rambabu94m@gmail.com\",\n  \"subject\": \"status_success\",\n  \"body\": \"The table test has been ingested successfully\"\n}",
+						"value": "{\n  \"email_recipient\": \"rambabu94m@gmail.com\",\n  \"subject\": \"@{variables('subject variable')}\",\n  \"body\": \"@{variables('email body variable')}\"\n}",
 						"type": "Expression"
 					}
 				}
