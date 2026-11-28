@@ -7,12 +7,10 @@
 		},
 		"parameters": {
 			"schema": {
-				"type": "string",
-				"defaultValue": "dbo"
+				"type": "string"
 			},
 			"table_name": {
-				"type": "string",
-				"defaultValue": "employee"
+				"type": "string"
 			}
 		},
 		"annotations": [],
